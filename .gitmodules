@@ -1,0 +1,3 @@
+[submodule "speexdsp"]
+	path = speexdsp
+	url = git@github.com:xiph/speexdsp.git
