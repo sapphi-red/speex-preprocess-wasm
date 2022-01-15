@@ -19,20 +19,23 @@ export const SpeexPreprocessCtlRequest = {
   /** Get preprocessor Automatic Gain Control level (float) */
   GET_AGC_LEVEL: 7,
 
-  /** Set preprocessor dereverb state */
-  SET_DEREVERB: 8,
-  /** Get preprocessor dereverb state */
-  GET_DEREVERB: 9,
+  // NOTE: de-reverberation is currently disabled
+  // /** Set preprocessor dereverb state */
+  // SET_DEREVERB: 8,
+  // /** Get preprocessor dereverb state */
+  // GET_DEREVERB: 9,
 
-  /** Set preprocessor dereverb level */
-  SET_DEREVERB_LEVEL: 10,
-  /** Get preprocessor dereverb level */
-  GET_DEREVERB_LEVEL: 11,
+  // NOTE: de-reverberation is currently disabled
+  // /** Set preprocessor dereverb level */
+  // SET_DEREVERB_LEVEL: 10,
+  // /** Get preprocessor dereverb level */
+  // GET_DEREVERB_LEVEL: 11,
 
-  /** Set preprocessor dereverb decay */
-  SET_DEREVERB_DECAY: 12,
-  /** Get preprocessor dereverb decay */
-  GET_DEREVERB_DECAY: 13,
+  // NOTE: de-reverberation is currently disabled
+  // /** Set preprocessor dereverb decay */
+  // SET_DEREVERB_DECAY: 12,
+  // /** Get preprocessor dereverb decay */
+  // GET_DEREVERB_DECAY: 13,
 
   /** Set probability required for the VAD to go from silence to voice */
   SET_PROB_START: 14,
@@ -59,10 +62,11 @@ export const SpeexPreprocessCtlRequest = {
   /** Get maximum attenuation of the residual echo in dB when near end is active (negative number) */
   GET_ECHO_SUPPRESS_ACTIVE: 23,
 
-  /** Set the corresponding echo canceller state so that residual echo suppression can be performed (NULL for no residual echo suppression) */
-  SET_ECHO_STATE: 24,
-  /** Get the corresponding echo canceller state */
-  GET_ECHO_STATE: 25,
+  // NOTE: needs SpeexEchoState pointer
+  // /** Set the corresponding echo canceller state so that residual echo suppression can be performed (NULL for no residual echo suppression) */
+  // SET_ECHO_STATE: 24,
+  // /** Get the corresponding echo canceller state */
+  // GET_ECHO_STATE: 25,
 
   /** Set maximal gain increase in dB/second (int32) */
   SET_AGC_INCREMENT: 26,

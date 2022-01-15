@@ -1,3 +1,4 @@
+export type I32Ptr = number
 export type F32Ptr = number
 export type SpeexPreprocessState = number
 export type SpeexPreprocessCtlRequest = number
