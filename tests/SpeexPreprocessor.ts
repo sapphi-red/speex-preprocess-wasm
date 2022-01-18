@@ -42,10 +42,67 @@ const cases: Array<[Frame, Frame]> = [
     [0.4765625, 0.4765625, 0.4765625, 0.4765625, 0.4765625, 0, 0, 0, 0, 0]
   ]
 ]
-
 for (const [i, c] of cases.entries()) {
   test(`SpeexPreprocessor.process: ${i}`, () => {
     process(c[0], c[1])
+  })
+}
+
+const toggleTests = ['denoise', 'agc', 'vad'] as const
+for (const toggleTest of toggleTests) {
+  test(`SpeexPreprocessor.${toggleTest}`, () => {
+    preprocessor[toggleTest] = false
+    assert.is(preprocessor[toggleTest], false)
+
+    preprocessor[toggleTest] = true
+    assert.is(preprocessor[toggleTest], true)
+  })
+}
+
+const numberTests = [
+  ['agcLevel', [1, 4]],
+  ['probStart', [1, 0]],
+  ['probContinue', [1, 0]],
+  ['noiseSuppress', [-1, 0]],
+  ['echoSuppress', [-1, 0]],
+  ['echoSuppressActive', [-1, 0]],
+  ['agcIncrement', [-1, 0]],
+  ['agcMaxGain', [-1, 0]],
+  ['agcTarget', [1, 4]]
+] as const
+for (const [numberTest, cases] of numberTests) {
+  test(`SpeexPreprocessor.${numberTest}`, () => {
+    for (const c of cases) {
+      preprocessor[numberTest] = c
+      assert.is(preprocessor[numberTest], c)
+    }
+  })
+}
+
+const readonlyNumberTests = [
+  'agcLoudness',
+  'agcGain',
+  'psdSize',
+  'noisePsdSize',
+  'prob'
+] as const
+for (const readonlyNumberTest of readonlyNumberTests) {
+  test(`SpeexPreprocessor.${readonlyNumberTest}`, () => {
+    assert.type(preprocessor[readonlyNumberTest], 'number')
+  })
+}
+
+const readonlyIntArrayTests = [
+  ['psd', 'psdSize'],
+  ['noisePsd', 'noisePsdSize']
+] as const
+for (const readonlyIntArrayTest of readonlyIntArrayTests) {
+  test(`SpeexPreprocessor.${readonlyIntArrayTest[0]}`, () => {
+    const value = preprocessor[readonlyIntArrayTest[0]]
+    const size = preprocessor[readonlyIntArrayTest[1]]
+
+    assert.instance(value, Int32Array)
+    assert.is(value.length, size)
   })
 }
 
