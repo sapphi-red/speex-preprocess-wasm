@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+        with:
+          submodules: true
       - uses: mymindstorm/setup-emsdk@v11
         with:
           version: 3.1.1
