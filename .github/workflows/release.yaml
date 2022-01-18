@@ -1,0 +1,32 @@
+name: automatic release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - uses: mymindstorm/setup-emsdk@v11
+        with:
+          version: 3.1.1
+      - run: sudo apt install -y autotools-dev autoconf libtool pkg-config
+      - name: setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+      - name: ci
+        run: npm ci
+      - name: build
+        run: npm run build
+      - name: release
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
