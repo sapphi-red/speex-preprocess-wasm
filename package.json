@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "npm run build:wasm && npm run build:js && npm run build:copy-wasm",
-    "build:wasm": "bash ./build-wasm.sh",
+    "build:wasm": "bash ./build/build-wasm.sh",
     "build:js": "tsup-node",
     "build:copy-wasm": "tsm scripts/copy-wasm.ts",
     "lint": "eslint --cache .",

@@ -1,12 +1,15 @@
 #! /bin/bash
 set -eux
 
+SCRIPT_DIR=`dirname $0`
+cd $SCRIPT_DIR
+
 cd speexdsp
 
 NAME=speex
-OUT_DIR=wasm-out
+OUT_DIR=../wasm-out
 
-./autogen.sh
+bash ./autogen.sh
 emconfigure ./configure --disable-examples --enable-neon=no
 emmake make
 

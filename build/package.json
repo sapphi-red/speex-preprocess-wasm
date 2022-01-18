@@ -1,0 +1,4 @@
+{
+  "-": "Emscripten doesn't work with ESModules. So switch to CommonJS Modules under this directory.",
+  "type": "commonjs"
+}
