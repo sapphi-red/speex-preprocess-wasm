@@ -107,7 +107,7 @@ export default class SpeexPreprocessor {
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ctlBuffIndex = this.ctlBuffPtr! / F32_BYTE_SIZE
-    this.speexModule.HEAP32[ctlBuffIndex] = value
+    this.speexModule.HEAPF32[ctlBuffIndex] = value
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.ctl(req, this.ctlBuffPtr!)
