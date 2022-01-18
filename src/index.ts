@@ -1,3 +1,5 @@
+import './speexLicense.js'
+
 export {
   default as SpeexPreprocessor,
   type LoadOptions
