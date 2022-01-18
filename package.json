@@ -35,6 +35,9 @@
     "url": "https://github.com/sapphi-red/speex-preprocess-wasm/issues"
   },
   "homepage": "https://github.com/sapphi-red/speex-preprocess-wasm#readme",
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/emscripten": "^1.39.6",
     "@types/node": "^17.0.9",
