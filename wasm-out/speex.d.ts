@@ -1,3 +1,4 @@
+export type I16Ptr = number
 export type I32Ptr = number
 export type F32Ptr = number
 export type SpeexPreprocessState = number
@@ -26,7 +27,7 @@ export interface SpeexModule extends EmscriptenModule {
    * @param x Audio sample vector (in and out). Must be same size as specified in speex_preprocess_state_init().
    * @return Bool value for voice activity (1 for speech, 0 for noise/silence), ONLY if VAD turned on.
    */
-  _speex_preprocess_run(state: SpeexPreprocessState, x: F32Ptr): 1 | 0
+  _speex_preprocess_run(state: SpeexPreprocessState, x: I16Ptr): 1 | 0
   /**
    * Used like the ioctl function to control the preprocessor parameters
    * @param st Preprocessor state

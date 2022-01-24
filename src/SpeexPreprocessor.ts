@@ -2,14 +2,18 @@ import {
   SpeexModule,
   SpeexPreprocessState,
   F32Ptr,
+  I16Ptr,
   I32Ptr
 } from '../wasm-out/speex'
 import { SpeexPreprocessCtlRequest } from './SpeexPreprocessCtlRequest'
 
 export type LoadOptions = Pick<SpeexModule, 'locateFile' | 'wasmBinary'>
 
+const I16_BYTE_SIZE = Int16Array.BYTES_PER_ELEMENT
 const I32_BYTE_SIZE = Int32Array.BYTES_PER_ELEMENT
 const F32_BYTE_SIZE = Float32Array.BYTES_PER_ELEMENT
+
+const I16_MAX_NUMBER = 2 ** 16 / 2 - 1
 
 export default class SpeexPreprocessor {
   private readonly speexModule: Readonly<SpeexModule>
@@ -17,7 +21,8 @@ export default class SpeexPreprocessor {
   readonly samplingRate: number
 
   private readonly state: SpeexPreprocessState
-  private processBuffPtr: F32Ptr
+  private processBuffPtr: I16Ptr
+  private processI16Buff: Int16Array
 
   private ctlBuffPtr?: I32Ptr | F32Ptr
 
@@ -35,8 +40,9 @@ export default class SpeexPreprocessor {
       this.samplingRate
     )
     this.processBuffPtr = this.speexModule._malloc(
-      this.frameSize * F32_BYTE_SIZE
+      this.frameSize * I16_BYTE_SIZE
     )
+    this.processI16Buff = new Int16Array(this.frameSize)
 
     if (!this.processBuffPtr) {
       this.destroy()
@@ -250,27 +256,49 @@ export default class SpeexPreprocessor {
     this.ctlSetI32(SpeexPreprocessCtlRequest.SET_AGC_TARGET, value)
   }
 
-  process(frame: Float32Array) {
-    if (frame.length != this.frameSize) {
+  private assertFrameSize(frame: ArrayLike<number>) {
+    if (frame.length !== this.frameSize) {
       throw new Error(
         `Frame size differs. Expected: ${this.frameSize}. Actual: ${frame.length}.`
       )
     }
+  }
 
-    const processBuffIndex = this.processBuffPtr / F32_BYTE_SIZE
-    this.speexModule.HEAPF32.set(frame, processBuffIndex)
+  processInt16(frame: Int16Array) {
+    this.assertFrameSize(frame)
+
+    const processBuffIndex = this.processBuffPtr / I16_BYTE_SIZE
+    this.speexModule.HEAP16.set(frame, processBuffIndex)
 
     const vad = this.speexModule._speex_preprocess_run(
       this.state,
       this.processBuffPtr
     )
-    const processedBuff = this.speexModule.HEAPF32.subarray(
+    const processedBuff = this.speexModule.HEAP16.subarray(
       processBuffIndex,
       processBuffIndex + this.frameSize
     )
     frame.set(processedBuff)
 
     return vad === 1
+  }
+
+  process(frame: Float32Array) {
+    this.assertFrameSize(frame)
+
+    for (let i = 0; i < frame.length; i++) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      this.processI16Buff[i] = frame[i]! * I16_MAX_NUMBER
+    }
+
+    const vad = this.processInt16(this.processI16Buff)
+
+    for (let i = 0; i < frame.length; i++) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      frame[i] = this.processI16Buff[i]! / I16_MAX_NUMBER
+    }
+
+    return vad
   }
 
   destroy() {
