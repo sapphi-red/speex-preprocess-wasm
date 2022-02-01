@@ -11,7 +11,8 @@
       "require": "./dist/index.cjs",
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./speex.wasm": "./dist/speex.wasm"
   },
   "scripts": {
     "build": "npm run build:wasm && npm run build:js && npm run build:copy-wasm",
