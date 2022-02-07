@@ -14,6 +14,7 @@ emconfigure ./configure --disable-examples --enable-neon=no
 emmake make
 
 emcc \
+  -O3 \
   -s STRICT=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
   -s MALLOC=emmalloc \
