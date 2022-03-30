@@ -1,4 +1,7 @@
 # @sapphi-red/speex-preprocess-wasm
+
+[![npm version](https://badge.fury.io/js/@sapphi-red%2Fspeex-preprocess-wasm.svg)](https://badge.fury.io/js/@sapphi-red%2Fspeex-preprocess-wasm) ![CI](https://github.com/sapphi-red/speex-preprocess-wasm/workflows/CI/badge.svg)
+
 WebAssembly build of [SpeexDSP preprocess](https://github.com/xiph/speexdsp/blob/master/include/speex/speex_preprocess.h).
 
 ## Install
