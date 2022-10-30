@@ -1,0 +1,5 @@
+dist
+node_modules
+wasm-out
+!wasm-out/speex.d.ts
+build/speexdsp
