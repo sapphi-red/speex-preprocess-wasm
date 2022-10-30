@@ -79,7 +79,7 @@ jobs:
           submodules: true
       - uses: mymindstorm/setup-emsdk@v11
         with:
-          version: 3.1.1
+          version: 3.1.24
       - run: sudo apt install -y autotools-dev autoconf libtool pkg-config
       - name: setup Node
         uses: actions/setup-node@v2
