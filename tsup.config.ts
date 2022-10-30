@@ -6,5 +6,6 @@ export default defineConfig({
   platform: 'browser',
   sourcemap: true,
   format: ['esm', 'cjs'],
-  dts: true
+  dts: true,
+  shims: true
 })
