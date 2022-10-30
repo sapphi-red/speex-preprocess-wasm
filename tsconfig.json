@@ -15,8 +15,6 @@
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "sourceMap": true,
-    "lib": [
-      "esnext"
-    ]
+    "lib": ["esnext"]
   }
 }
