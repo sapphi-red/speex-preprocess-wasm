@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           cache: npm
@@ -26,9 +26,9 @@ jobs:
     needs: [packages]
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           cache: npm
@@ -42,9 +42,9 @@ jobs:
     needs: [packages]
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           cache: npm
@@ -58,9 +58,9 @@ jobs:
     needs: [packages]
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           cache: npm
@@ -74,7 +74,7 @@ jobs:
     needs: [packages]
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - uses: mymindstorm/setup-emsdk@v11
@@ -82,7 +82,7 @@ jobs:
           version: 3.1.24
       - run: sudo apt install -y autotools-dev autoconf libtool pkg-config
       - name: setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           cache: npm
@@ -90,7 +90,7 @@ jobs:
         run: npm ci
       - name: run build
         run: npm run build
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: wasm-dist
           path: |
@@ -102,15 +102,15 @@ jobs:
     needs: [build]
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           cache: npm
       - name: npm ci
         run: npm ci
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: wasm-dist
           path: ./wasm-out-
