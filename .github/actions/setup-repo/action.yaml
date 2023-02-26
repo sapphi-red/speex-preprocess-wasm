@@ -1,18 +1,9 @@
 name: Setup Repo
 description: Prepare repo
 
-inputs:
-  submodules:
-    description: Clone submodules
-    default: false # this is string
-
 runs:
   using: composite
   steps:
-      - name: checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: ${{ inputs.skip-expo == 'true' }}
       - name: setup Node
         uses: actions/setup-node@v3
         with:
@@ -23,5 +14,5 @@ runs:
         shell: bash
       - run: pnpm --version
         shell: bash
-      - run: pnpm i
+      - run: pnpm i --frozen-lockfile
         shell: bash
