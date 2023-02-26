@@ -10,25 +10,16 @@ jobs:
     name: release
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-repo
         with:
           submodules: true
       - uses: mymindstorm/setup-emsdk@v12
         with:
           version: 3.1.32
       - run: sudo apt install -y autotools-dev autoconf libtool pkg-config
-      - name: setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
-      - name: ci
-        run: npm ci
       - name: build
-        run: npm run build
+        run: pnpm run build
       - name: release
-        run: npm publish --access public
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
