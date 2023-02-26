@@ -21,6 +21,7 @@ emcc \
   -s MODULARIZE=1 \
   -s EXPORT_ES6=1 \
   -s USE_ES6_IMPORT_META=0 \
+  -s ENVIRONMENT=web,worker \
   -s EXPORTED_FUNCTIONS="['_speex_preprocess_state_init', '_speex_preprocess_state_destroy', '_speex_preprocess_run', '_speex_preprocess_ctl', '_malloc', '_free']" \
   libspeexdsp/.libs/libspeexdsp.a \
   -o $NAME.js

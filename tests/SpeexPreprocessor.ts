@@ -1,6 +1,6 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
-import { URL, fileURLToPath } from 'node:url'
+import * as fs from 'node:fs/promises'
 
 import './_emscriptenWorkaround.js'
 import { loadSpeexModule, SpeexPreprocessor } from '../src/index.js'
@@ -9,9 +9,9 @@ type HalfFrame = [number, number, number, number, number]
 type Frame = [...HalfFrame, ...HalfFrame]
 const FRAME_SIZE: Frame['length'] = 10
 
+const wasmBinary = await fs.readFile(new URL('../wasm-out/speex.wasm', import.meta.url))
 const speexModule = await loadSpeexModule({
-  locateFile: () =>
-    fileURLToPath(new URL('../wasm-out/speex.wasm', import.meta.url))
+  wasmBinary
 })
 const preprocessor = new SpeexPreprocessor(speexModule, FRAME_SIZE, 44100)
 
