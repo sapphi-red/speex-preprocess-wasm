@@ -121,4 +121,4 @@ export const SpeexPreprocessCtlRequest = {
 } as const
 
 export type SpeexPreprocessCtlRequest =
-  typeof SpeexPreprocessCtlRequest[keyof typeof SpeexPreprocessCtlRequest]
+  (typeof SpeexPreprocessCtlRequest)[keyof typeof SpeexPreprocessCtlRequest]
