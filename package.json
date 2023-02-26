@@ -1,6 +1,6 @@
 {
   "name": "@sapphi-red/speex-preprocess-wasm",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "WebAssembly build of SpeexDSP proprocess",
   "type": "module",
   "main": "./dist/index.js",
