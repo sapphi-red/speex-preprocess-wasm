@@ -9,7 +9,9 @@ type HalfFrame = [number, number, number, number, number]
 type Frame = [...HalfFrame, ...HalfFrame]
 const FRAME_SIZE: Frame['length'] = 10
 
-const wasmBinary = await fs.readFile(new URL('../wasm-out/speex.wasm', import.meta.url))
+const wasmBinary = await fs.readFile(
+  new URL('../wasm-out/speex.wasm', import.meta.url)
+)
 const speexModule = await loadSpeexModule({
   wasmBinary
 })
