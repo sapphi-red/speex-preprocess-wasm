@@ -2,7 +2,6 @@ import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 import * as fs from 'node:fs/promises'
 
-import './_emscriptenWorkaround.js'
 import { loadSpeexModule, SpeexPreprocessor } from '../src/index.js'
 
 type HalfFrame = [number, number, number, number, number]
