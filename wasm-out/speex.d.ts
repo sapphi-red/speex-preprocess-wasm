@@ -4,7 +4,8 @@ export type F32Ptr = number
 export type SpeexPreprocessState = number
 export type SpeexPreprocessCtlRequest = number
 
-export interface SpeexModule extends EmscriptenModule {
+/** @internal */
+export interface SpeexModule extends Pick<EmscriptenModule, 'wasmBinary' | 'locateFile' | '_free' | '_malloc' | 'HEAP16' | 'HEAP32' | 'HEAPF32'> {
   /**
    * Creates a new preprocessing state. You MUST create one state per channel processed.
    * @param frame_size Number of samples to process at one time (should correspond to 10-20 ms). Must be

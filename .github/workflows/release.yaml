@@ -16,7 +16,7 @@ jobs:
       - uses: ./.github/actions/setup-repo
       - uses: mymindstorm/setup-emsdk@v14
         with:
-          version: 3.1.32
+          version: 3.1.56
       - run: sudo apt install -y autotools-dev autoconf libtool pkg-config
       - name: build
         run: pnpm run build
