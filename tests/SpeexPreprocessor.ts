@@ -22,7 +22,7 @@ const process = (input: Frame, expected: Frame) => {
   assert.equal([...tArr], expected)
 }
 
-const cases: Array<[Frame, Frame]> = [
+const cases: [Frame, Frame][] = [
   [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

@@ -71,22 +71,17 @@ export default class SpeexPreprocessor {
   private ctlGetI32(req: SpeexPreprocessCtlRequest) {
     this.mallocCtlBuffPtr()
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ctlBuffIndex = this.ctlBuffPtr! / I32_BYTE_SIZE
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.ctl(req, this.ctlBuffPtr!)
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.speexModule.HEAP32[ctlBuffIndex]!
   }
   private ctlSetI32(req: SpeexPreprocessCtlRequest, value: number) {
     this.mallocCtlBuffPtr()
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ctlBuffIndex = this.ctlBuffPtr! / I32_BYTE_SIZE
     this.speexModule.HEAP32[ctlBuffIndex] = value
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.ctl(req, this.ctlBuffPtr!)
   }
 
@@ -100,22 +95,17 @@ export default class SpeexPreprocessor {
   private ctlGetF32(req: SpeexPreprocessCtlRequest) {
     this.mallocCtlBuffPtr()
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ctlBuffIndex = this.ctlBuffPtr! / F32_BYTE_SIZE
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.ctl(req, this.ctlBuffPtr!)
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.speexModule.HEAPF32[ctlBuffIndex]!
   }
   private ctlSetF32(req: SpeexPreprocessCtlRequest, value: number) {
     this.mallocCtlBuffPtr()
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ctlBuffIndex = this.ctlBuffPtr! / F32_BYTE_SIZE
     this.speexModule.HEAPF32[ctlBuffIndex] = value
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.ctl(req, this.ctlBuffPtr!)
   }
 
@@ -287,14 +277,12 @@ export default class SpeexPreprocessor {
     this.assertFrameSize(frame)
 
     for (let i = 0; i < frame.length; i++) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.processI16Buff[i] = frame[i]! * I16_MAX_NUMBER
     }
 
     const vad = this.processInt16(this.processI16Buff)
 
     for (let i = 0; i < frame.length; i++) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       frame[i] = this.processI16Buff[i]! / I16_MAX_NUMBER
     }
 

@@ -11,38 +11,38 @@ jobs:
     name: run lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-repo
       - run: pnpm run lint --max-warnings=0
   format:
     name: run format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-repo
       - run: pnpm prettier --check .
   type-check:
     name: run type-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-repo
       - run: pnpm run type-check
   build:
     name: run build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - uses: ./.github/actions/setup-repo
-      - uses: mymindstorm/setup-emsdk@v12
+      - uses: mymindstorm/setup-emsdk@v14
         with:
           version: 3.1.32
       - run: sudo apt install -y autotools-dev autoconf libtool pkg-config
       - name: run build
         run: pnpm run build
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: wasm-dist
           path: |
@@ -53,9 +53,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-repo
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: wasm-dist
           path: ./wasm-out-
