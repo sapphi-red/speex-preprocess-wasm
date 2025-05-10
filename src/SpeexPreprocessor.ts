@@ -1,4 +1,4 @@
-import {
+import type {
   SpeexModule,
   SpeexPreprocessState,
   F32Ptr,

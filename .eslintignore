@@ -1,5 +1,0 @@
-node_modules
-speexdsp
-wasm-out/*
-!wasm-out/speex.d.ts
-dist
