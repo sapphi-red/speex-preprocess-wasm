@@ -12,7 +12,7 @@ const wasmBinary = await fs.readFile(
   new URL('../wasm-out/speex.wasm', import.meta.url)
 )
 const speexModule = await loadSpeexModule({
-  wasmBinary
+  wasmBinary: wasmBinary.buffer as ArrayBuffer
 })
 const preprocessor = new SpeexPreprocessor(speexModule, FRAME_SIZE, 44100)
 
